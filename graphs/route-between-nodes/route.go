@@ -1,14 +1,12 @@
 package main
 
 func IsRouteExists(graph map[int][]int, from, to int) bool {
-	queue := make([]int, 0)
-	queue = append(queue, from)
+	queue := NewQueue()
+	queue.Enqueue(from)
 	visited := map[int]bool{}
 
-	for len(queue) != 0 {
-		node := queue[0]
-		queue = queue[1:]
-
+	for !queue.IsEmpty() {
+		node, _ := queue.Dequeue()
 		if _, ok := visited[node]; !ok {
 			visited[node] = true
 			if neighbours, ok := graph[node]; ok {
@@ -16,7 +14,7 @@ func IsRouteExists(graph map[int][]int, from, to int) bool {
 					if neighbour == to {
 						return true
 					}
-					queue = append(queue, neighbour)
+					queue.Enqueue(neighbour)
 				}
 			}
 		}
