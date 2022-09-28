@@ -10,7 +10,7 @@ func minTree(n []int, start, end int) *Node {
 	}
 
 	mid := (start + end) / 2
-	node := NewNode(mid)
+	node := NewNode(n[mid])
 	node.Left = minTree(n, start, mid-1)
 	node.Right = minTree(n, mid+1, end)
 
